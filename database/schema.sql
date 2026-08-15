@@ -1,0 +1,19 @@
+-- Verve Creative Studio — single shared MySQL database schema
+-- Namespacing convention: one table set per feature area, no cross-feature name collisions.
+-- Fill in as each module (Section 9) is built and approved. Do not deploy speculative tables.
+
+-- Example naming convention (uncomment/extend as modules are built):
+-- CREATE TABLE bookings_flow_a ( ... );
+-- CREATE TABLE bookings_flow_b ( ... );
+-- CREATE TABLE exhibitions ( ... );
+-- CREATE TABLE gallery_artworks ( ... );
+-- CREATE TABLE shop_products ( ... );
+-- CREATE TABLE shop_orders ( ... );
+-- CREATE TABLE installations ( ... );
+-- CREATE TABLE training_courses ( ... );
+-- CREATE TABLE portfolio_projects ( ... );
+-- CREATE TABLE testimonials ( ... );
+-- CREATE TABLE brands ( ... );
+-- CREATE TABLE journal_articles ( ... );
+-- CREATE TABLE admin_users ( ... );
+-- CREATE TABLE client_users ( ... );

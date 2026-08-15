@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /includes/
+Disallow: /uploads/
+Disallow: /database/
+Allow: /
+
+Sitemap: https://vervecreativestudio.co.uk/sitemap.xml

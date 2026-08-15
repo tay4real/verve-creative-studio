@@ -1,0 +1,3 @@
+# Block direct browser access to shared PHP includes/config — these should only ever be require()'d, never requested directly
+Order Deny,Allow
+Deny from all

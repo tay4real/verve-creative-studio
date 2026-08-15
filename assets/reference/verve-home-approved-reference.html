@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verve Creative Studio — We Create Beyond Vision</title>
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0a09;
+    --bg-alt:#141210;
+    --bg-panel:#18150f;
+    --line:#2a2620;
+    --gold:#c9a24b;
+    --gold-light:#e8c873;
+    --gold-dim:#8a6b23;
+    --cream:#f2ede4;
+    --muted:#a8a29a;
+    --muted-dim:#6f6a62;
+    --grad: linear-gradient(90deg,#7c3aed 0%,#db2777 45%,#f2a93b 100%);
+    --radius:2px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--cream);
+    font-family:'Jost',sans-serif;
+    font-weight:300;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:500;
+    line-height:1.1;
+    letter-spacing:.01em;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1320px;margin:0 auto;padding:0 48px;}
+  @media(max-width:900px){.wrap{padding:0 24px;}}
+
+  .eyebrow{
+    font-family:'Jost',sans-serif;
+    font-size:12.5px;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--gold);
+    display:flex;align-items:center;gap:14px;
+    margin-bottom:18px;
+  }
+  .eyebrow::after{content:"";width:36px;height:1px;background:var(--gold-dim);display:inline-block;}
+  .gold-underline{width:56px;height:2px;background:var(--gold);margin-top:22px;border-radius:1px;}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:16px 30px;
+    font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+    border-radius:var(--radius);
+    transition:all .3s ease;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .btn-solid{background:var(--gold);color:#0b0a09;font-weight:500;}
+  .btn-solid:hover{background:var(--gold-light);}
+  .btn-outline{border:1px solid var(--gold-dim);color:var(--gold-light);}
+  .btn-outline:hover{border-color:var(--gold);background:rgba(201,162,75,.08);}
+
+  /* ================= HEADER ================= */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(11,10,9,.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:18px;flex-wrap:nowrap;
+    padding:20px 48px;max-width:1320px;margin:0 auto;
+  }
+  .nav-right{display:flex;align-items:center;gap:16px;flex:none;}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Cormorant Garamond',serif;}
+  .logo .mark-img{height:38px;width:auto;display:block;}
+  .logo .name{font-size:19px;letter-spacing:.06em;color:var(--cream);}
+  .logo .sub{display:block;font-family:'Jost',sans-serif;font-size:9px;letter-spacing:.3em;color:var(--muted-dim);margin-top:-2px;}
+
+  nav.links{display:flex;gap:34px;align-items:center;}
+  nav.links a{
+    font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:#d8d3c9;position:relative;padding-bottom:6px;
+  }
+  nav.links a.active{color:var(--gold);}
+  nav.links a.active::after{
+    content:"";position:absolute;bottom:0;left:0;width:100%;height:1.5px;background:var(--gold);
+  }
+  nav.links a:hover{color:var(--gold-light);}
+  .dropdown{position:relative;}
+  .dropdown-menu{
+    position:absolute;top:calc(100% + 16px);left:50%;transform:translateX(-50%);
+    background:var(--bg-alt);border:1px solid var(--line);min-width:220px;
+    padding:10px 0;opacity:0;visibility:hidden;transition:.2s ease;
+    box-shadow:0 20px 40px rgba(0,0,0,.5);
+  }
+  .dropdown:hover .dropdown-menu{opacity:1;visibility:visible;top:calc(100% + 8px);}
+  .dropdown-menu a{display:block;padding:11px 22px;font-size:12px;letter-spacing:.1em;}
+  .dropdown-menu a:hover{background:rgba(201,162,75,.07);}
+
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;}
+  .burger span{width:26px;height:1.5px;background:var(--gold);transition:transform .25s ease, opacity .2s ease;}
+  .burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .burger.open span:nth-child(2){opacity:0;}
+  .burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+  @media(max-width:1080px){
+    nav.links{display:none;}
+    .burger{display:flex;}
+  }
+  @media(max-width:760px){
+    .nav-inner{padding:16px 24px;}
+    .header-cta{padding:11px 16px;font-size:11.5px;}
+    .logo .sub{display:none;}
+  }
+  @media(max-width:560px){
+    .header-cta{display:none;}
+  }
+
+  /* ---- Mobile nav drawer ---- */
+  .mobile-cta-wrap{display:none;}
+  @media(max-width:1080px){
+    nav.links{
+      display:none;
+      position:fixed;top:var(--header-h,73px);left:0;right:0;bottom:0;
+      background:var(--bg-alt);border-top:1px solid var(--line);
+      flex-direction:column;align-items:stretch;gap:0;
+      padding:8px 26px 30px;overflow-y:auto;z-index:99;
+    }
+    nav.links.show-mobile{display:flex;}
+    nav.links a{
+      padding:16px 2px;border-bottom:1px solid var(--line);
+      font-size:14.5px;width:100%;
+    }
+    nav.links a.active::after{display:none;}
+    .dropdown{width:100%;}
+    .dropdown-menu{
+      position:static;transform:none;opacity:1;visibility:hidden;
+      max-height:0;overflow:hidden;border:none;background:none;
+      padding:0;box-shadow:none;transition:max-height .25s ease;
+    }
+    .dropdown.open .dropdown-menu{visibility:visible;max-height:220px;padding:0 0 8px 14px;}
+    .dropdown-menu a{border-bottom:none;padding:10px 0;font-size:13px;color:var(--muted);}
+    .dropdown-caret{transition:transform .2s ease;display:inline-block;}
+    .dropdown.open .dropdown-caret{transform:rotate(180deg);}
+    .mobile-cta-wrap{
+      display:block;margin-top:22px;
+    }
+    .mobile-cta-wrap .btn{width:100%;justify-content:center;}
+  }
+
+  /* ================= HERO ================= */
+  .hero{
+    position:relative;padding:100px 0 80px;
+    background:
+      radial-gradient(ellipse at 78% 30%, rgba(124,58,237,.10), transparent 45%),
+      radial-gradient(ellipse at 90% 70%, rgba(219,39,119,.10), transparent 40%),
+      var(--bg);
+    overflow:hidden;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center;}
+  @media(max-width:980px){.hero-grid{grid-template-columns:1fr;}}
+
+  .hero h1{font-size:clamp(42px,5.4vw,68px);color:var(--cream);}
+  .hero h1 .gold-word{
+    background:linear-gradient(100deg,var(--gold-light),var(--gold) 60%,#a97a2e);
+    -webkit-background-clip:text;background-clip:text;color:transparent;font-style:italic;
+  }
+  .hero p.lead{margin:26px 0 34px;max-width:460px;color:var(--muted);font-size:16px;font-weight:300;}
+  .hero-actions{display:flex;gap:18px;flex-wrap:wrap;}
+
+  .hero-visual{
+    position:relative;aspect-ratio:4/3.1;border-radius:4px;overflow:hidden;
+    background:
+      radial-gradient(circle at 35% 40%, rgba(233,196,120,.18), transparent 55%),
+      linear-gradient(135deg,#1c1812,#0d0b09 60%,#120c16);
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid var(--line);
+  }
+  .hero-visual::before{
+    content:"";position:absolute;inset:0;
+    background:var(--grad);opacity:.06;mix-blend-mode:screen;
+  }
+  .lens-mark{
+    width:44%;aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(circle at 40% 35%, #4a5d78 0%, #1a1f26 38%, #0a0908 70%);
+    border:6px solid #26221b;position:relative;
+    box-shadow:0 0 0 1px rgba(201,162,75,.25), inset 0 0 60px rgba(0,0,0,.7);
+  }
+  .lens-mark::after{
+    content:"";position:absolute;inset:18%;border-radius:50%;
+    background:conic-gradient(from 90deg,#7c3aed,#db2777,#f2a93b,#7c3aed);
+    opacity:.55;filter:blur(2px);
+  }
+  .lens-mark::before{
+    content:"";position:absolute;top:14%;left:22%;width:22%;height:14%;border-radius:50%;
+    background:rgba(255,255,255,.25);filter:blur(6px);z-index:2;
+  }
+  .brush-tail{
+    position:absolute;bottom:6%;right:4%;width:44%;height:10px;
+    background:var(--grad);border-radius:20px;transform:rotate(-8deg);
+    filter:blur(.5px);opacity:.85;
+  }
+  .brush-tail::after{
+    content:"";position:absolute;right:-6px;top:-14px;width:34px;height:34px;border-radius:50% 50% 50% 4px;
+    background:linear-gradient(135deg,#f2a93b,#db2777);transform:rotate(45deg);
+  }
+
+  /* ================= TRUST BAR ================= */
+  .trust-bar{
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    background:var(--bg-alt);padding:38px 0;
+  }
+  .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;}
+  @media(max-width:900px){.trust-grid{grid-template-columns:repeat(2,1fr);}}
+  .trust-item{display:flex;gap:16px;align-items:flex-start;}
+  .trust-icon{
+    width:38px;height:38px;flex:none;border:1px solid var(--gold-dim);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;color:var(--gold);
+  }
+  .trust-item h4{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-light);font-weight:500;margin-bottom:4px;}
+  .trust-item p{font-size:13.5px;color:var(--muted);}
+
+  /* ================= GENERIC SECTION ================= */
+  section{padding:110px 0;position:relative;}
+  .section-alt{background:var(--bg-alt);}
+  .section-head{max-width:640px;margin-bottom:56px;}
+  .section-head h2{font-size:clamp(30px,3.6vw,44px);color:var(--cream);}
+  .section-head p{color:var(--muted);margin-top:18px;font-size:15.5px;max-width:520px;}
+  .section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+  .section-head.center .eyebrow{justify-content:center;}
+  .section-head.center .eyebrow::after{display:none;}
+  .section-head.center .gold-underline{margin-left:auto;margin-right:auto;}
+
+  /* placeholder art panel */
+  .art-panel{
+    border-radius:4px;border:1px solid var(--line);
+    background:linear-gradient(150deg,#1c1712,#0e0c0a 55%,#160f18);
+    position:relative;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+    min-height:280px;
+  }
+  .art-panel::before{content:"";position:absolute;inset:0;background:var(--grad);opacity:.05;}
+  .art-panel span{
+    font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted-dim);
+    border:1px dashed #3a352b;padding:10px 16px;border-radius:2px;
+  }
+
+  /* ---- About Verve ---- */
+  .about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:70px;align-items:center;}
+  @media(max-width:900px){.about-grid{grid-template-columns:1fr;gap:44px;}}
+  .about-grid .art-panel{aspect-ratio:4/5;min-height:0;}
+  .about-copy p{color:var(--muted);font-size:15.5px;margin-bottom:18px;max-width:520px;}
+  .stat-row{display:flex;gap:44px;margin:36px 0 34px;flex-wrap:wrap;}
+  .stat-row .num{font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--gold-light);}
+  .stat-row .label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-dim);margin-top:2px;}
+
+  /* ---- Featured Projects ---- */
+  .proj-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+  @media(max-width:1100px){.proj-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:600px){.proj-grid{grid-template-columns:1fr;}}
+  .proj-card{border:1px solid var(--line);border-radius:3px;overflow:hidden;transition:.35s ease;background:var(--bg-panel);}
+  .proj-card:hover{border-color:var(--gold-dim);transform:translateY(-4px);}
+  .proj-card .art-panel{aspect-ratio:3/3.6;min-height:0;border:none;border-radius:0;}
+  .proj-tag{position:absolute;top:14px;left:14px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);background:rgba(11,10,9,.7);padding:5px 10px;border:1px solid var(--gold-dim);z-index:2;}
+  .proj-body{padding:20px 20px 24px;}
+  .proj-body h4{font-size:19px;color:var(--cream);margin-bottom:6px;}
+  .proj-body p{font-size:13px;color:var(--muted);}
+  .proj-body .view{margin-top:14px;display:inline-block;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-light);}
+  .center-link{display:flex;justify-content:center;margin-top:52px;}
+  .center-link a{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);display:inline-flex;gap:8px;align-items:center;}
+
+  /* ---- Why Choose ---- */
+  .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px 60px;}
+  @media(max-width:900px){.why-grid{grid-template-columns:1fr;}}
+  .why-item{display:flex;gap:20px;padding:28px 0;border-bottom:1px solid var(--line);}
+  .why-icon{
+    flex:none;width:46px;height:46px;border-radius:50%;
+    border:1px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;color:var(--gold);
+  }
+  .why-item h4{font-size:20px;color:var(--cream);margin-bottom:8px;font-weight:500;}
+  .why-item p{font-size:14px;color:var(--muted);}
+
+  /* ---- Founder ---- */
+  .founder-grid{display:grid;grid-template-columns:.7fr 1.3fr;gap:64px;align-items:center;}
+  @media(max-width:900px){.founder-grid{grid-template-columns:1fr;}}
+  .founder-frame{
+    width:220px;height:220px;border-radius:50%;margin:0 auto;position:relative;
+    background:linear-gradient(150deg,#1c1712,#0e0c0a);
+    border:2px solid var(--gold-dim);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .founder-frame::after{
+    content:"";position:absolute;inset:-8px;border-radius:50%;
+    border:1px solid transparent;
+    background:conic-gradient(from 0deg,#7c3aed,#db2777,#f2a93b,#7c3aed) border-box;
+    -webkit-mask:linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;
+    opacity:.6;
+  }
+  .founder-frame span{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-dim);}
+  .founder-copy .role{color:var(--gold);font-size:12px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px;}
+  .founder-copy h3{font-size:32px;color:var(--cream);margin-bottom:16px;}
+  .founder-copy p{color:var(--muted);font-size:15px;max-width:560px;margin-bottom:16px;}
+  blockquote{
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:var(--gold-light);
+    border-left:2px solid var(--gold-dim);padding-left:22px;margin:24px 0;
+  }
+
+  /* ---- Testimonials ---- */
+  .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  @media(max-width:900px){.test-grid{grid-template-columns:1fr;}}
+  .test-card{
+    background:var(--bg-panel);border:1px solid var(--line);border-radius:3px;padding:34px 30px;
+  }
+  .test-card .quote-mark{
+    font-family:'Cormorant Garamond',serif;font-size:44px;color:var(--gold-dim);line-height:1;margin-bottom:6px;
+  }
+  .test-card p.text{color:#cfc9bd;font-size:14.5px;margin-bottom:22px;font-style:italic;}
+  .test-person{display:flex;align-items:center;gap:12px;}
+  .test-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#2a241a,#181410);border:1px solid var(--gold-dim);}
+  .test-person .n{font-size:13.5px;color:var(--cream);}
+  .test-person .r{font-size:11.5px;color:var(--muted-dim);}
+
+  /* ---- Brands ---- */
+  .brand-strip{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;}
+  .brand-box{
+    width:150px;height:70px;border:1px solid var(--line);border-radius:2px;
+    display:flex;align-items:center;justify-content:center;color:var(--muted-dim);
+    font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  }
+
+  /* ---- Journal ---- */
+  .journal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  @media(max-width:900px){.journal-grid{grid-template-columns:1fr;}}
+  .journal-card .art-panel{aspect-ratio:16/10;min-height:0;border-radius:3px 3px 0 0;border-bottom:none;}
+  .journal-card{border:1px solid var(--line);border-radius:3px;overflow:hidden;background:var(--bg-panel);}
+  .journal-meta{display:flex;gap:12px;padding:20px 22px 0;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);}
+  .journal-meta .date{color:var(--muted-dim);}
+  .journal-card h4{font-size:19px;padding:10px 22px 0;color:var(--cream);}
+  .journal-card p{font-size:13px;color:var(--muted);padding:10px 22px 22px;}
+
+  /* ---- CTA band ---- */
+  .cta-band{
+    padding:110px 0;text-align:center;position:relative;overflow:hidden;
+    background:
+      radial-gradient(ellipse at 30% 30%, rgba(124,58,237,.12), transparent 50%),
+      radial-gradient(ellipse at 75% 70%, rgba(242,169,59,.10), transparent 50%),
+      var(--bg-alt);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .cta-band h2{font-size:clamp(30px,4vw,46px);max-width:680px;margin:0 auto 20px;}
+  .cta-band p{color:var(--muted);max-width:480px;margin:0 auto 38px;font-size:15.5px;}
+  .cta-actions{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;}
+
+  /* ================= FOOTER ================= */
+  footer{background:#080706;padding:80px 0 30px;border-top:1px solid var(--line);}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1.2fr;gap:40px;padding-bottom:56px;border-bottom:1px solid var(--line);}
+  @media(max-width:980px){.footer-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.footer-grid{grid-template-columns:1fr;}}
+  footer h5{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-light);margin-bottom:20px;font-weight:500;}
+  footer ul{list-style:none;}
+  footer li{margin-bottom:11px;}
+  footer a.flink{font-size:13.5px;color:var(--muted);}
+  footer a.flink:hover{color:var(--gold-light);}
+  .footer-brand p{color:var(--muted);font-size:13.5px;margin:16px 0 22px;max-width:280px;}
+  .social-row{display:flex;gap:14px;}
+  .social-row a{
+    width:34px;height:34px;border:1px solid var(--line);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--muted);
+  }
+  .social-row a:hover{border-color:var(--gold-dim);color:var(--gold-light);}
+  .newsletter{display:flex;margin-top:14px;border:1px solid var(--line);border-radius:2px;overflow:hidden;}
+  .newsletter input{flex:1;background:transparent;border:none;padding:12px 14px;color:var(--cream);font-family:'Jost',sans-serif;font-size:13px;}
+  .newsletter input:focus{outline:none;}
+  .newsletter button{background:var(--gold);border:none;padding:0 18px;color:#0b0a09;font-size:12px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:26px;flex-wrap:wrap;gap:14px;}
+  .footer-bottom p{font-size:12px;color:var(--muted-dim);}
+  .footer-bottom .legal{display:flex;gap:24px;}
+  .footer-bottom .legal a{font-size:12px;color:var(--muted-dim);}
+  .footer-bottom .legal a:hover{color:var(--gold-light);}
+
+  /* reveal animation */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* services grid (from hero page, kept for continuity) */
+  .services-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;}
+  @media(max-width:1100px){.services-grid{grid-template-columns:repeat(3,1fr);}}
+  @media(max-width:640px){.services-grid{grid-template-columns:repeat(2,1fr);}}
+  .service-card{border:1px solid var(--line);border-radius:3px;overflow:hidden;background:var(--bg-panel);}
+  .service-card .art-panel{aspect-ratio:3/2.4;min-height:0;border:none;border-radius:0;}
+  .service-card .sc-body{padding:16px;}
+  .service-card h4{font-size:15.5px;color:var(--cream);margin-bottom:4px;}
+  .service-card p{font-size:12px;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <img src="assets/logo.png" alt="Verve Creative Studio" class="mark-img">
+      <span>
+        <span class="name">VERVE</span>
+        <span class="sub">CREATIVE STUDIO</span>
+      </span>
+    </a>
+    <nav class="links" id="mainNav">
+      <a href="/" class="active">Home</a>
+      <a href="/about">About</a>
+      <a href="/services">Services</a>
+      <a href="/portfolio">Portfolio</a>
+      <a href="/exhibitions">Exhibitions</a>
+      <div class="dropdown" id="bookingsDropdown">
+        <a href="#" class="dropdown-toggle">Bookings <span class="dropdown-caret">▾</span></a>
+        <div class="dropdown-menu">
+          <a href="/book/project">Book a Project</a>
+          <a href="/book/training">Training &amp; Consultation</a>
+          <a href="/book/exhibition">Exhibition Tickets</a>
+        </div>
+      </div>
+      <a href="/journal">Journal</a>
+      <a href="/contact">Contact</a>
+      <div class="mobile-cta-wrap">
+        <a href="/book/project" class="btn btn-solid">Book a Project</a>
+      </div>
+    </nav>
+    <div class="nav-right">
+      <a href="/book/project" class="btn btn-outline header-cta" style="padding:13px 24px;">Book a Project</a>
+      <button class="burger" id="burgerBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow" style="margin-bottom:22px;">Stories. Art. Emotions. Immortalised.</p>
+      <h1>We Create<br>Beyond <span class="gold-word">Vision.</span></h1>
+      <div class="gold-underline"></div>
+      <p class="lead">Verve Creative Studio is a full-service creative house specialising in film, photography, artwork, and exhibitions. We turn ideas into timeless visual experiences.</p>
+      <div class="hero-actions">
+        <a href="/portfolio" class="btn btn-solid">Explore Our Work</a>
+        <a href="#" class="btn btn-outline">▶ Watch Showreel</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="lens-mark"></div>
+      <div class="brush-tail"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST BAR ============ -->
+<div class="trust-bar">
+  <div class="wrap trust-grid">
+    <div class="trust-item">
+      <div class="trust-icon">◆</div>
+      <div><h4>Premium Quality</h4><p>World-class creative production excellence</p></div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">◎</div>
+      <div><h4>Bespoke Service</h4><p>Tailored solutions for your unique vision</p></div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">✦</div>
+      <div><h4>Creative Passion</h4><p>Storytelling that connects and inspires</p></div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">★</div>
+      <div><h4>Award Winning</h4><p>Recognised for creativity and impact worldwide</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SERVICES PREVIEW ============ -->
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">What We Do</p>
+      <h2>Creative Services</h2>
+      <div class="gold-underline"></div>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service-card"><div class="art-panel"><span>Film Set</span></div><div class="sc-body"><h4>Film Production</h4><p>Cinematic storytelling</p></div></div>
+      <div class="service-card"><div class="art-panel"><span>Wedding</span></div><div class="sc-body"><h4>Wedding Film &amp; Photography</h4><p>Beautiful moments</p></div></div>
+      <div class="service-card"><div class="art-panel"><span>Photography</span></div><div class="sc-body"><h4>Photography</h4><p>Capturing life, perfectly</p></div></div>
+      <div class="service-card"><div class="art-panel"><span>Music Video</span></div><div class="sc-body"><h4>Music Video Production</h4><p>Visuals that hit different</p></div></div>
+      <div class="service-card"><div class="art-panel"><span>Corporate</span></div><div class="sc-body"><h4>Corporate Content</h4><p>Professional. Powerful.</p></div></div>
+      <div class="service-card"><div class="art-panel"><span>Exhibition</span></div><div class="sc-body"><h4>Exhibitions</h4><p>Art that speaks</p></div></div>
+    </div>
+    <div class="center-link"><a href="/services">View All Services →</a></div>
+  </div>
+</section>
+
+<!-- ============ ABOUT VERVE ============ -->
+<section class="section-alt">
+  <div class="wrap about-grid">
+    <div class="art-panel reveal"><span>Studio Portrait — Placeholder</span></div>
+    <div class="about-copy reveal">
+      <p class="eyebrow">Who We Are</p>
+      <h2>A Studio Built On Craft, Not Trend.</h2>
+      <div class="gold-underline" style="margin-bottom:24px;"></div>
+      <p>Verve Creative Studio was founded on a simple belief: that every brand, couple, and artist has a story worth telling with precision and soul. What began as a photography practice has grown into a full creative house — spanning film, artwork, and exhibition curation.</p>
+      <p>Every project moves through the same discipline: listen first, design intentionally, deliver without compromise.</p>
+      <div class="stat-row">
+        <div><div class="num">8+</div><div class="label">Years Active</div></div>
+        <div><div class="num">250+</div><div class="label">Projects Delivered</div></div>
+        <div><div class="num">12</div><div class="label">Countries Served</div></div>
+      </div>
+      <a href="/about" class="btn btn-outline">Discover Our Story</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURED PROJECTS ============ -->
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Selected Work</p>
+      <h2>Featured Projects</h2>
+      <p>A curated look at recent films, campaigns, and artwork commissions.</p>
+    </div>
+    <div class="proj-grid reveal">
+      <div class="proj-card">
+        <div style="position:relative;"><span class="proj-tag">Film</span><div class="art-panel"><span>Project Still</span></div></div>
+        <div class="proj-body"><h4>Midnight Provisions</h4><p>Brand film for a Lagos hospitality group</p><span class="view">View Project →</span></div>
+      </div>
+      <div class="proj-card">
+        <div style="position:relative;"><span class="proj-tag">Wedding</span><div class="art-panel"><span>Project Still</span></div></div>
+        <div class="proj-body"><h4>Amara &amp; Dele</h4><p>Destination wedding film &amp; photography</p><span class="view">View Project →</span></div>
+      </div>
+      <div class="proj-card">
+        <div style="position:relative;"><span class="proj-tag">Artwork</span><div class="art-panel"><span>Project Still</span></div></div>
+        <div class="proj-body"><h4>Fragments of Self</h4><p>Commissioned portrait series</p><span class="view">View Project →</span></div>
+      </div>
+      <div class="proj-card">
+        <div style="position:relative;"><span class="proj-tag">Exhibition</span><div class="art-panel"><span>Project Still</span></div></div>
+        <div class="proj-body"><h4>Colour As Memory</h4><p>Group exhibition, curated &amp; produced</p><span class="view">View Project →</span></div>
+      </div>
+    </div>
+    <div class="center-link"><a href="/portfolio">View Full Portfolio →</a></div>
+  </div>
+</section>
+
+<!-- ============ WHY CHOOSE VERVE ============ -->
+<section class="section-alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">The Verve Difference</p>
+      <h2>Why Choose Verve</h2>
+    </div>
+    <div class="why-grid reveal">
+      <div class="why-item"><div class="why-icon">◎</div><div><h4>Bespoke Creative Direction</h4><p>No templates — every brief gets a concept built specifically for it.</p></div></div>
+      <div class="why-item"><div class="why-icon">✦</div><div><h4>Cinematic Craftsmanship</h4><p>Editorial-grade visual standards across every medium we work in.</p></div></div>
+      <div class="why-item"><div class="why-icon">◆</div><div><h4>End-to-End Production</h4><p>From concept and shoot day to final delivery, handled in-house.</p></div></div>
+      <div class="why-item"><div class="why-icon">✧</div><div><h4>International Reach</h4><p>Trusted by clients across Nigeria, the UK, and the diaspora.</p></div></div>
+      <div class="why-item"><div class="why-icon">★</div><div><h4>Dedicated Client Experience</h4><p>A single point of contact from first enquiry to final handover.</p></div></div>
+      <div class="why-item"><div class="why-icon">◈</div><div><h4>Recognised Craft</h4><p>Award-acknowledged work across film, photography, and art.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MEET THE FOUNDER ============ -->
+<section>
+  <div class="wrap founder-grid">
+    <div class="reveal">
+      <div class="founder-frame"><span>Founder<br>Portrait</span></div>
+    </div>
+    <div class="founder-copy reveal">
+      <p class="role">The Vision Behind Verve</p>
+      <h3>Meet Tosin Iwayemi</h3>
+      <p>Founder &amp; Creative Director of Verve Creative Studio, Tosin's practice spans film, photography, and fine art — built on a belief that craft and commercial work are not opposites.</p>
+      <blockquote>"We don't just document moments — we compose them."</blockquote>
+      <p>Under Tosin's direction, Verve has grown from a single-discipline studio into a multidisciplinary creative house serving clients across the UK and Nigeria.</p>
+      <a href="/about#founder" class="btn btn-outline">Read Full Bio</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="section-alt">
+  <div class="wrap">
+    <div class="section-head center reveal" style="max-width:600px;">
+      <p class="eyebrow">What Our Clients Say</p>
+      <h2>Client Testimonials</h2>
+    </div>
+    <div class="test-grid reveal">
+      <div class="test-card">
+        <div class="quote-mark">"</div>
+        <p class="text">Verve captured our wedding day exactly as it felt, not just how it looked. Every frame is something we'll treasure.</p>
+        <div class="test-person"><div class="test-avatar"></div><div><div class="n">Amara O.</div><div class="r">Client, Wedding Film</div></div></div>
+      </div>
+      <div class="test-card">
+        <div class="quote-mark">"</div>
+        <p class="text">Professional from the first call to final delivery. Our brand film has genuinely changed how clients perceive us.</p>
+        <div class="test-person"><div class="test-avatar"></div><div><div class="n">David K.</div><div class="r">Marketing Director</div></div></div>
+      </div>
+      <div class="test-card">
+        <div class="quote-mark">"</div>
+        <p class="text">The exhibition they curated for us sold out its opening night. Verve understands art as much as they understand production.</p>
+        <div class="test-person"><div class="test-avatar"></div><div><div class="n">Ifeoma A.</div><div class="r">Gallery Owner</div></div></div>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:22px;font-size:11.5px;color:var(--muted-dim);letter-spacing:.08em;">Sample quotes shown for design review — to be replaced with real client testimonials.</p>
+  </div>
+</section>
+
+<!-- ============ BRANDS ============ -->
+<section>
+  <div class="wrap">
+    <div class="section-head center reveal" style="max-width:600px;">
+      <p class="eyebrow">Trusted By</p>
+      <h2>Brands We've Worked With</h2>
+    </div>
+    <div class="brand-strip reveal">
+      <div class="brand-box">Brand 01</div>
+      <div class="brand-box">Brand 02</div>
+      <div class="brand-box">Brand 03</div>
+      <div class="brand-box">Brand 04</div>
+      <div class="brand-box">Brand 05</div>
+      <div class="brand-box">Brand 06</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ JOURNAL ============ -->
+<section class="section-alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">From The Journal</p>
+      <h2>Latest Insights &amp; Stories</h2>
+    </div>
+    <div class="journal-grid reveal">
+      <div class="journal-card">
+        <div class="art-panel"><span>Article Image</span></div>
+        <div class="journal-meta"><span>Wedding</span><span class="date">June 2026</span></div>
+        <h4>Planning Your Wedding Film Timeline</h4>
+        <p>What to schedule, and when, for coverage you'll actually love.</p>
+      </div>
+      <div class="journal-card">
+        <div class="art-panel"><span>Article Image</span></div>
+        <div class="journal-meta"><span>Art</span><span class="date">May 2026</span></div>
+        <h4>Inside Our Latest Exhibition Build</h4>
+        <p>A behind-the-scenes look at curating "Colour As Memory."</p>
+      </div>
+      <div class="journal-card">
+        <div class="art-panel"><span>Article Image</span></div>
+        <div class="journal-meta"><span>Corporate</span><span class="date">May 2026</span></div>
+        <h4>Why Brand Films Outperform Ads</h4>
+        <p>Lessons from three recent corporate content projects.</p>
+      </div>
+    </div>
+    <div class="center-link"><a href="/journal">Visit the Journal →</a></div>
+  </div>
+</section>
+
+<!-- ============ BOOK A PROJECT CTA ============ -->
+<section class="cta-band">
+  <div class="wrap">
+    <p class="eyebrow" style="justify-content:center;"><span style="display:none;"></span>Ready To Create Something Timeless?</p>
+    <h2>Let's Bring Your Vision to Life.</h2>
+    <p>Whether it's a wedding, a brand film, or a gallery exhibition — tell us what you're building, and we'll shape it with you.</p>
+    <div class="cta-actions">
+      <a href="/book/project" class="btn btn-solid">Book a Project →</a>
+      <a href="/contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo"><img src="assets/logo.png" alt="Verve Creative Studio" class="mark-img"><span><span class="name">VERVE</span><span class="sub">CREATIVE STUDIO</span></span></a>
+        <p>A multidisciplinary creative house working across film, photography, art, and exhibitions.</p>
+        <div class="social-row">
+          <a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+          <a href="#" aria-label="YouTube">YT</a>
+        </div>
+      </div>
+      <div>
+        <h5>Explore</h5>
+        <ul>
+          <li><a class="flink" href="/about">About</a></li>
+          <li><a class="flink" href="/services">Services</a></li>
+          <li><a class="flink" href="/portfolio">Portfolio</a></li>
+          <li><a class="flink" href="/exhibitions">Exhibitions</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Bookings</h5>
+        <ul>
+          <li><a class="flink" href="/book/project">Book a Project</a></li>
+          <li><a class="flink" href="/book/training">Training &amp; Consultation</a></li>
+          <li><a class="flink" href="/book/exhibition">Exhibition Tickets</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Resources</h5>
+        <ul>
+          <li><a class="flink" href="/journal">Journal</a></li>
+          <li><a class="flink" href="/contact">Contact</a></li>
+          <li><a class="flink" href="/faq">FAQs</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Stay Updated</h5>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:6px;">Journal updates &amp; studio news, occasionally.</p>
+        <div class="newsletter">
+          <input type="email" placeholder="Your email">
+          <button>Join</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Verve Creative Studio. All rights reserved.</p>
+      <div class="legal"><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Keep the mobile drawer's top edge pinned exactly below the header, whatever its real height is
+  function setHeaderHeightVar(){
+    const h = document.querySelector('header').offsetHeight;
+    document.documentElement.style.setProperty('--header-h', h + 'px');
+  }
+  setHeaderHeightVar();
+  window.addEventListener('resize', setHeaderHeightVar);
+
+  // Burger opens/closes the drawer, animates to a close state, and locks body scroll while open
+  const burger = document.getElementById('burgerBtn');
+  const nav = document.getElementById('mainNav');
+  burger?.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('show-mobile');
+    burger.classList.toggle('open', isOpen);
+    burger.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  // Close the drawer after choosing a link (better than leaving it open on navigation)
+  nav?.querySelectorAll('a:not(.dropdown-toggle)').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('show-mobile');
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Bookings dropdown: hover works on desktop via CSS; on touch, tap toggles it open instead
+  const bookingsDropdown = document.getElementById('bookingsDropdown');
+  const dropdownToggle = bookingsDropdown?.querySelector('.dropdown-toggle');
+  dropdownToggle?.addEventListener('click', (e) => {
+    if (window.matchMedia('(max-width:1080px)').matches) {
+      e.preventDefault();
+      bookingsDropdown.classList.toggle('open');
+    }
+  });
+
+  // Scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
