@@ -1,7 +1,6 @@
 # Verve Creative Studio
 
-**A production-oriented creative services platform built with PHP, MySQL,
-JavaScript and CSS.**
+**Production-oriented creative services platform built with PHP, MySQL, JavaScript and CSS.**
 
 🌐 **Live Website:** https://vervecreativestudio.co.uk/
 
@@ -12,21 +11,21 @@ JavaScript and CSS.**
 Verve Creative Studio is a web platform developed for a creative services
 business.
 
-The project provides the foundation for presenting creative services,
+The platform provides the foundation for presenting creative services,
 portfolio work, exhibitions, galleries, installations, journal content,
 training and consultation services, and commerce-related functionality.
 
 The application is built using plain PHP, MySQL, JavaScript and CSS without
 a web application framework.
 
-The project is developed locally using XAMPP and deployed to IONOS Web
-Hosting Plus.
+Development is carried out locally using XAMPP, with the production
+application deployed on IONOS Web Hosting Plus.
 
 ---
 
 ## 🌐 Live Website
 
-**[Visit Verve Creative Studio](https://vervecreativestudio.co.uk/)**
+**https://vervecreativestudio.co.uk/**
 
 The live website represents the deployed production environment.
 
@@ -41,17 +40,15 @@ The live website represents the deployed production environment.
 | Frontend | HTML, CSS, JavaScript |
 | Payment Processing | Stripe |
 | Email | IONOS SMTP |
-| Web Server | IONOS Web Hosting Plus |
-| Local Development | XAMPP |
-| Database Administration | MySQL |
 | Image Processing | PHP GD |
-| Deployment | FTP / FileZilla |
-| Scheduled Tasks | IONOS Cron |
+| Local Development | XAMPP |
+| Production Hosting | IONOS Web Hosting Plus |
+| Deployment | FTP |
 | Source Control | Git / GitHub |
 
 ---
 
-## 🏗️ Architecture
+## 🏗️ High-Level Architecture
 
 The application follows a conventional server-rendered PHP architecture.
 
@@ -59,21 +56,17 @@ The application follows a conventional server-rendered PHP architecture.
                          User
                            │
                            ▼
-                    Verve Web Interface
+                    Web Application
+                           │
+                           ▼
+                     PHP Application
                            │
                   ┌────────┴────────┐
                   │                 │
                   ▼                 ▼
-              PHP Pages        JavaScript
-                  │
-                  ▼
-             Shared Includes
-                  │
-       ┌──────────┼───────────┐
-       │          │           │
-       ▼          ▼           ▼
-   Database     Stripe      SMTP
-    MySQL       Payments     Email
-       │
-       ▼
-   Application Data
+               MySQL        External Services
+                                │
+                         ┌──────┴──────┐
+                         │             │
+                         ▼             ▼
+                       Stripe        SMTP
