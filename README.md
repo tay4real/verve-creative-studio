@@ -1,140 +1,79 @@
 # Verve Creative Studio
 
-A custom full-stack web platform for a creative studio, built with **PHP, MySQL, JavaScript and CSS**.
+**A production-oriented creative services platform built with PHP, MySQL,
+JavaScript and CSS.**
 
-Verve Creative Studio brings together the studio's public website, portfolio, exhibitions, artwork gallery, services, e-commerce workflows, booking processes, client management and administrative operations within a single web application.
-
----
-
-## Project Overview
-
-Verve Creative Studio was developed as a custom web application rather than using a pre-built framework or CMS.
-
-The platform is designed around a modular PHP/MySQL architecture with dynamic content, user accounts, administrative functionality, payment processing, file uploads and transactional email.
-
-The application is designed for deployment on standard web hosting without requiring a frontend build process.
+🌐 **Live Website:** https://vervecreativestudio.co.uk/
 
 ---
 
-## Key Features
+## Overview
 
-### Public Website
+Verve Creative Studio is a web platform developed for a creative services
+business.
 
-- Home page
-- About
-- Contact
-- Services
-- Portfolio
-- Exhibitions
-- Artwork gallery
-- Installations
-- Journal
+The project provides the foundation for presenting creative services,
+portfolio work, exhibitions, galleries, installations, journal content,
+training and consultation services, and commerce-related functionality.
 
-### E-commerce
+The application is built using plain PHP, MySQL, JavaScript and CSS without
+a web application framework.
 
-- Product listings
-- Product details
-- Multi-item shopping cart
-- Checkout workflow
-- Single-item enquiry workflow
-- Stripe payment integration
-
-### Booking & Enquiries
-
-- Service selection
-- Online payment flow
-- Multi-step booking workflow
-- Creative project brief
-- Training and consultation enrolment
-- Confirmation workflow
-
-### Client Dashboard
-
-- Client account system
-- Client-specific dashboard
-- Account and session management
-- Client-related workflows
-
-### Administration
-
-- Administrative dashboard
-- Content and operational management
-- Feature-specific administrative modules
-- Authentication and access control
-
-### Media & File Management
-
-- Artwork and project images
-- User-uploaded files
-- Image processing using PHP GD
-- Protected upload directories
-- Prevention of PHP execution within upload directories
+The project is developed locally using XAMPP and deployed to IONOS Web
+Hosting Plus.
 
 ---
 
-## My Contribution
+## 🌐 Live Website
 
-**Lead Developer / Software Engineer**
+**[Visit Verve Creative Studio](https://vervecreativestudio.co.uk/)**
 
-I designed and developed the application's core structure and implemented the major application workflows.
-
-My responsibilities include:
-
-- PHP application development
-- MySQL database design and integration
-- Application architecture
-- Dynamic page and content implementation
-- Authentication and user management
-- Client dashboard development
-- Administrative functionality
-- Booking and enquiry workflows
-- E-commerce functionality
-- Stripe payment integration
-- Stripe webhook implementation
-- File upload handling
-- Transactional email integration
-- Frontend integration using HTML, CSS and JavaScript
-- Production deployment and server configuration
-
-The project is developed as a custom application without relying on a PHP framework.
+The live website represents the deployed production environment.
 
 ---
 
-## Technology Stack
+## 🛠️ Technology Stack
 
-| Layer | Technology |
+| Area | Technology |
 |---|---|
 | Backend | PHP |
 | Database | MySQL |
 | Frontend | HTML, CSS, JavaScript |
-| Payments | Stripe |
-| Email | SMTP |
-| Image Processing | PHP GD |
+| Payment Processing | Stripe |
+| Email | IONOS SMTP |
+| Web Server | IONOS Web Hosting Plus |
 | Local Development | XAMPP |
-| Production | Web hosting environment |
-| Deployment | FTP |
+| Database Administration | MySQL |
+| Image Processing | PHP GD |
+| Deployment | FTP / FileZilla |
+| Scheduled Tasks | IONOS Cron |
+| Source Control | Git / GitHub |
 
 ---
 
-## Application Architecture
+## 🏗️ Architecture
 
-The application follows a modular PHP structure:
+The application follows a conventional server-rendered PHP architecture.
 
 ```text
-                        VER﻿VE CREATIVE STUDIO
-                                  │
-             ┌────────────────────┼────────────────────┐
-             │                    │                    │
-          Frontend           PHP Application         MySQL
-       HTML / CSS / JS              │               Database
-                                   │
-                 ┌─────────────────┼─────────────────┐
-                 │                 │                 │
-            Public Site       Client Dashboard    Admin Area
-                 │                 │                 │
-                 └─────────────────┼─────────────────┘
-                                   │
-                         External Integrations
-                         ┌─────────┼─────────┐
-                         │         │         │
-                       Stripe     SMTP    File Uploads
+                         User
+                           │
+                           ▼
+                    Verve Web Interface
+                           │
+                  ┌────────┴────────┐
+                  │                 │
+                  ▼                 ▼
+              PHP Pages        JavaScript
+                  │
+                  ▼
+             Shared Includes
+                  │
+       ┌──────────┼───────────┐
+       │          │           │
+       ▼          ▼           ▼
+   Database     Stripe      SMTP
+    MySQL       Payments     Email
+       │
+       ▼
+   Application Data
